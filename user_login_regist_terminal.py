@@ -1,105 +1,82 @@
 from time import sleep
+import secrets
+import string
+from os import getcwd
 
-# keeps program work until closed by user
+# Flag to keep the program running until closed by the user
 key = True
 
 while key:
+    # Prompt user to choose an option: login, register or exit
     user_choose = input("""\t\t!Welcome!
-Plase type:
+Please type:
 1\t\t ==> To login
 2\t\t ==> Register New User
 any button\t ==> To exit\n
 """)
 
-    # opening account.txt file
-    with open("/home/mete/Desktop/accounts.txt") as accounts:
-        # reading all accounts and saving them into variable
+    # Read existing accounts from the accounts.txt file, can be changed based on data location
+    with open(getcwd() + "/accounts.txt") as accounts:
         account_text = accounts.read()
+        each_user = account_text.splitlines(False)  # Separate each user's information into a list
+        print(each_user)
 
-        # separating each user information into list
-        each_user = account_text.splitlines(False)
-
-    # option login
+    # Option: Login
     if user_choose == "1":
-        # promting user to input username
+        # Prompt user to enter their username and password
         userName = input("\nEnter your username\t:")
-
-        # promting user to input password
         password = input("Enter your password\t:")
         print()
-            
-        # username and password who try to login
+
+        # Concatenate username and password
         entre = userName + " " + password
 
-        # checking user information from accounts.txt
+        # Check if the entered username and password match any in accounts.txt
         if entre in each_user:
             print("\nWelcome", userName)
             print("*"*30)
             sleep(2)
             key = False
-            break
-
         else:
             print("Wrong username or password, please try it again!\n\n")
 
-    # option registration
+    # Option: Registration
     elif user_choose == "2":
-        # promting new user to input username and password
+        # Prompt new user to enter their username
         new_user_name = input("\nPlease enter user name\t:")
-        custom_defualt_password = input("\nPlease type 'd' to create automated password\notherwise type anything else\t:")
 
-        # generating automated passord
+        # Prompt new user to choose between an automated password or a custom one
+        custom_defualt_password = input("\nPlease type 'd' to create an automated password\notherwise type anything else\t:")
+
+        # Generate an automated password
         if custom_defualt_password.lower() == "d":
-            # necessary imports
-            import secrets
-            import string
-
-            # define the alphabet
+            # Define the alphabet
             letters = string.ascii_letters
             digits = string.digits
             special_chars = string.punctuation
-
             alphabet = letters + digits + special_chars
 
-            # fix password length
+            # Set password length
             pwd_length = 8
 
-            # generate a password string
-            new_user_password = ''
-            for i in range(pwd_length):
-                new_user_password += ''.join(secrets.choice(alphabet))
-            
-            # printing out new password for user
+            # Generate password string
+            new_user_password = ''.join(secrets.choice(alphabet) for _ in range(pwd_length))
+
+            # Print the new password for the user
             print("\nYou new automated password is\t:", new_user_password, "\n\n")
 
-        # creating custom passwordd
+        # Create a custom password
         else:
             new_user_password = input("\nInput your custom password\t:")
 
-        # new user account info
-        account = new_user_name + " " + new_user_password
+        # Save the new user's information to accounts.txt
+        new_account = new_user_name + " " + new_user_password
+        with open(getcwd() + "/accounts.txt", "a") as n_accounts:
+            n_accounts.write("\n" + new_account)
 
-        # saving new users information into accounts.txt   
-        with open("/home/mete/Desktop/accounts.txt", "a") as accounts:
-            accounts.write("\n" + account)
-
-    # option exit
+    # Option: Exit
     else:
         print("\nExiting...\n")
         print("*"*30)
         sleep(2)
         key = False
-            
-
-    
-
-
-
-
-
-
-
-
-
-
-
