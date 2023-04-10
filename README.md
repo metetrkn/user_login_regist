@@ -7,6 +7,7 @@ Table of Contents
     Installation
     Usage
     Contributing
+    Credits
 
 Installation
 
