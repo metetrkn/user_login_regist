@@ -1,5 +1,4 @@
 !!! Simple Login and Registration System !!!
-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
 This is a simple command-line based login and registration system in Python. The program allows users to log in with their credentials, register a new account, and save the account information to a file.
 
