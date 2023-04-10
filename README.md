@@ -25,7 +25,12 @@ Usage
     You may change account.txt file with any type of database but then you must change source code line 19 and line 74
 
 Contributing
+
+    Contributions are welcome. Please open an issue or submit a pull request to suggest changes or improvements.
     
+    
+Credits
+
     Mete Turkan
     linkedIn    : linkedin.com/in/mete-turkan
     Inst        : m_trkn46
